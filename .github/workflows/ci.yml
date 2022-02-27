@@ -42,3 +42,9 @@ jobs:
         run: ko build . --bare --sbom=none
         env:
           KO_DOCKER_REPO: "registry.heroku.com/cw-go-base/web"
+
+      - name: Release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a cw-go-base web
