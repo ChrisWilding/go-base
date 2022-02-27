@@ -1,7 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello, World!"))
+}
 
 func main() {
-	fmt.Println("Hello, World!")
+	r := mux.NewRouter()
+	r.HandleFunc("/hello", http.HandlerFunc(hello)).Methods("GET")
+	http.ListenAndServe(":8080", r)
 }
