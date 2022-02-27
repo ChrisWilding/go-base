@@ -9,7 +9,7 @@ import (
 )
 
 func TestHelloHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/hello", nil)
+	req, err := http.NewRequest(http.MethodGet, "/hello", nil)
 	assert.Nil(t, err)
 
 	rr := httptest.NewRecorder()

@@ -12,6 +12,6 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/hello", http.HandlerFunc(hello)).Methods("GET")
+	r.HandleFunc("/hello", http.HandlerFunc(hello)).Methods(http.MethodGet)
 	http.ListenAndServe(":8080", r)
 }
