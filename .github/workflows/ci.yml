@@ -23,3 +23,19 @@ jobs:
 
       - name: Test
         run: go test -v ./...
+
+      - name: Set up Ko
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: go install github.com/google/ko@latest
+
+      - name: Login with Ko
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: ko login --username=_ --password="$HEROKU_API_KEY" registry.heroku.com
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+
+      - name: Build and Push with Ko
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: ko build . --bare --sbom=none
+        env:
+          KO_DOCKER_REPO: "registry.heroku.com/cw-go-base/web"
