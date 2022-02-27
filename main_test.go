@@ -18,5 +18,5 @@ func TestHelloHandler(t *testing.T) {
 	handler.ServeHTTP(rr, req)
 
 	assert.Equal(t, rr.Code, http.StatusOK)
-	assert.Equal(t, rr.Body.String(), "Hello, World!")
+	assert.Equal(t, rr.Body.String(), "Hello, Heroku!")
 }

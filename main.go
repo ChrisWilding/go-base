@@ -9,7 +9,7 @@ import (
 )
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello, World!")) //nolint:errcheck
+	w.Write([]byte("Hello, Heroku!")) //nolint:errcheck
 }
 
 func main() {
